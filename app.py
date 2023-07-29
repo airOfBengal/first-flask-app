@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from forms import LoginForm
+from forms import LoginForm, SignUpForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "dfewfew123213rwdsgert34tgfd1234trgf"
@@ -60,9 +60,15 @@ def login():
     return render_template("login.html", form=form)
 
 
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    form = SignUpForm()
+    return render_template("signup.html", form=form)
+
+
 @app.route("/about")
 def about():
-    return 'We are a non-profit organization working as an animal rescue. We aim to help you connect with the purrfect furbaby for you! The animals you find on our website are rescued and rehabilitated animals. Our mission is to promote the ideology "adopt, don\'t hop"! '
+    return render_template("about.html")
 
 
 @app.route("/<my_name>")

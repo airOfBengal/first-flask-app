@@ -28,7 +28,14 @@ pets = [
 ]
 
 
-users = {"atiq@email.com": "atiq", "rony@email.com": "rony"}
+users = [
+    {
+        "id": 1,
+        "full_name": "Pet Rescue Team",
+        "email": "team@pawsrescue.co",
+        "password": "adminpass",
+    },
+]
 
 
 @app.route("/")
@@ -46,11 +53,12 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        for u_email, u_password in users.items():
-            if u_email == form.email.data and u_password == form.password.data:
-                return render_template(
-                    "login.html", form=form, message="Successfully Logged In"
-                )
+        for user in users:
+            if (
+                user["email"] == form.email.data
+                and user["password"] == form.password.data
+            ):
+                return render_template("login.html", message="Successfully Logged In")
         return render_template(
             "login.html", form=form, message="Incorrect Email or Password"
         )
@@ -63,6 +71,15 @@ def login():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignUpForm()
+    if form.validate_on_submit():
+        new_user = {
+            "id": len(users) + 1,
+            "full_name": form.full_name.data,
+            "email": form.email.data,
+            "password": form.password.data,
+        }
+        users.append(new_user)
+        return render_template("signup.html", message="Successfully signed up")
     return render_template("signup.html", form=form)
 
 

@@ -12,6 +12,7 @@ Login Page
 {% endif %}
 
 <form action="{{url_for('login')}}" method="POST">
+  {% if form %}
   {{ form.email.label }}<br>
   {{ form.email }}
   {% if form.email.errors %}
@@ -36,6 +37,7 @@ Login Page
   <br>
   {{ form.csrf_token }}
   {{ form.submit }}
+  {% endif %}
 </form>
 <hr>
 {% endblock %}

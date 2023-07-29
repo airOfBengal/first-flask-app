@@ -12,59 +12,63 @@ Sign Up
 {{ message }}
 {% endif %}
 
-{{ form.full_name.label}} <br>
-{{ form.full_name }}
-{% if form.full_name.errors %}
-<br>
-<ul>
-    {% for error in form.full_name.errors %}
-    <li>
-        {{ error }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br>
-{{ form.email.label }} <br>
-{{ form.email }}
-{% if form.email.errors %}
-<br>
-<ul>
-    {% for error in form.email.errors %}
-    <li>
-        {{ error }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br>
-{{ form.password.label }} <br>
-{{ form.password }}
-{% if form.password.errors %}
-<br>
-<ul>
-    {% for error in form.password.errors %}
-    <li>
-        {{ error }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br>
-{{ form.confirm_password.label }} <br>
-{{ form.confirm_password }}
-{% if form.confirm_password.errors %}
-<br>
-<ul>
-    {% for error in form.confirm_password.errors %}
-    <li>
-        {{ error }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<br>
-{{ form.csrf_token }}
-{{ form.submit }}
-
+<form action="{{url_for('signup')}}" method="POST">
+    {% if form %}
+    {{ form.full_name.label}} <br>
+    {{ form.full_name }}
+    {% if form.full_name.errors %}
+    <br>
+    <ul>
+        {% for error in form.full_name.errors %}
+        <li>
+            <b style="color:tomato;"> {{ error }} </b>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    {{ form.email.label }} <br>
+    {{ form.email }}
+    {% if form.email.errors %}
+    <br>
+    <ul>
+        {% for error in form.email.errors %}
+        <li>
+            <b style="color:tomato;"> {{ error }} </b>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    {{ form.password.label }} <br>
+    {{ form.password }}
+    {% if form.password.errors %}
+    <br>
+    <ul>
+        {% for error in form.password.errors %}
+        <li>
+            <b style="color:tomato;"> {{ error }} </b>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    {{ form.confirm_password.label }} <br>
+    {{ form.confirm_password }}
+    {% if form.confirm_password.errors %}
+    <br>
+    <ul>
+        {% for error in form.confirm_password.errors %}
+        <li>
+            <b style="color:tomato;"> {{ error }} </b>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    {{ form.csrf_token }}
+    {{ form.submit }}
+    {% endif %}
+</form>
+<hr>
 {% endblock %}
